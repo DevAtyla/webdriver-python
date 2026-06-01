@@ -22,12 +22,12 @@ import time
 class ChromeDriver:
     def __init__(
         self,
-        diver_executable: str,
+        driver_executable: str,
         timeout_seconds: int,
         max_retry_attempts: int,
         sleep_seconds: float,
     ):
-        self.diver_executable = diver_executable
+        self.driver_executable = driver_executable
         self.timeout_seconds = timeout_seconds
         self.sleep_seconds = sleep_seconds
         self.max_retry_attempts: int = max_retry_attempts
@@ -52,6 +52,7 @@ class ChromeDriver:
         if not self.is_driver_started():
             logger.debug("Iniciando ChromeDriver...")
             opt = webdriver.ChromeOptions()
+            opt.binary_location = self.driver_executable
             for o in options:
                 opt.add_argument(o)
             self._driver = webdriver.Chrome(opt)
